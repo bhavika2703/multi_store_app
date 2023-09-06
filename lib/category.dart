@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_store_app/category/man_category.dart';
 import 'package:multi_store_app/utilities/categ_list.dart';
 import 'package:multi_store_app/widgets/fake_search.dart';
 
@@ -23,6 +24,19 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
+  final PageController _pageController = PageController();
+
+  @override
+  void initState() {
+    for (var element in items) {
+      element.isSelected = false;
+    }
+    setState(() {
+      items[0].isSelected = true;
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -47,21 +61,22 @@ class _CategoryScreenState extends State<CategoryScreen> {
   Widget sideNavigator(Size size) {
     return SizedBox(
       height: size.height * 0.8,
-      width: size.width * 0.3,
+      width: size.width * 0.2,
       child: ListView.builder(
         itemCount: items.length,
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              for (var element in items){
-                element.isSelected =false;
-              }
-              setState(() {
-                items[index].isSelected = true;
-              });
+              _pageController.animateToPage(index,
+                  duration: Duration(
+                    milliseconds: 100,
+                  ),
+                  curve: Curves.bounceInOut);
             },
             child: Container(
-                color: items[index].isSelected == true ?Colors.white:Colors.grey.shade300,
+                color: items[index].isSelected == true
+                    ? Colors.white
+                    : Colors.grey.shade300,
                 height: 100,
                 child: Center(child: Text(items[index].label))),
           );
@@ -75,6 +90,28 @@ class _CategoryScreenState extends State<CategoryScreen> {
       height: size.height * 0.8,
       width: size.width * 0.8,
       color: Colors.white,
+      child: PageView(
+          controller: _pageController,
+          onPageChanged: (value) {
+            for (var element in items) {
+              element.isSelected = false;
+            }
+            setState(() {
+              items[value].isSelected = true;
+            });
+          },
+          scrollDirection: Axis.vertical,
+          children: const [
+           MenCategory(),
+            Center(child: Text('women category')),
+            Center(child: Text('shoes category')),
+            Center(child: Text('bags category')),
+            Center(child: Text('electronic category')),
+            Center(child: Text('accessories category')),
+            Center(child: Text('home and garden category')),
+            Center(child: Text('kids category')),
+            Center(child: Text('beauty category')),
+          ]),
     );
   }
 }
