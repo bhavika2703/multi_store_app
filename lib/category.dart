@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_store_app/category/man_category.dart';
+import 'package:multi_store_app/category/women_category.dart';
 import 'package:multi_store_app/utilities/categ_list.dart';
 import 'package:multi_store_app/widgets/fake_search.dart';
 
@@ -102,8 +103,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
           },
           scrollDirection: Axis.vertical,
           children: const [
-           MenCategory(),
-            Center(child: Text('women category')),
+            MenCategory(),
+           WomenCategory(),
             Center(child: Text('shoes category')),
             Center(child: Text('bags category')),
             Center(child: Text('electronic category')),
