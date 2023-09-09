@@ -1,8 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:multi_store_app/category/man_category.dart';
+import 'package:multi_store_app/category/accessories_category.dart';
+import 'package:multi_store_app/category/bages_category.dart';
+import 'package:multi_store_app/category/beauty_category.dart';
+import 'package:multi_store_app/category/electronics_ccategory.dart';
+import 'package:multi_store_app/category/home_and_garden_Category.dart';
+import 'package:multi_store_app/category/kids_category.dart';
+import 'package:multi_store_app/category/men_category.dart';
+import 'package:multi_store_app/category/shoes_category.dart';
 import 'package:multi_store_app/category/women_category.dart';
-import 'package:multi_store_app/utilities/categ_list.dart';
 import 'package:multi_store_app/widgets/fake_search.dart';
 
 List<ItemData> items = [
@@ -69,7 +74,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           return GestureDetector(
             onTap: () {
               _pageController.animateToPage(index,
-                  duration: Duration(
+                  duration: const Duration(
                     milliseconds: 100,
                   ),
                   curve: Curves.bounceInOut);
@@ -104,14 +109,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
           scrollDirection: Axis.vertical,
           children: const [
             MenCategory(),
-           WomenCategory(),
-            Center(child: Text('shoes category')),
-            Center(child: Text('bags category')),
-            Center(child: Text('electronic category')),
-            Center(child: Text('accessories category')),
-            Center(child: Text('home and garden category')),
-            Center(child: Text('kids category')),
-            Center(child: Text('beauty category')),
+            WomenCategory(),
+            ShoesCategory(),
+            BagsCategory(),
+            ElectronicsCategory(),
+            AccessoriesCategory(),
+            HomeAndGardenCategory(),
+            KidsCategory(),
+            BeautyCategory(),
           ]),
     );
   }

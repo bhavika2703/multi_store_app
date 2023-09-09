@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:multi_store_app/utilities/categ_list.dart';
 import 'package:multi_store_app/widgets/categ_widget.dart';
 
-class WomenCategory extends StatelessWidget {
-  const WomenCategory({Key? key}) : super(key: key);
+class BagsCategory extends StatelessWidget {
+  const BagsCategory({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,19 +20,19 @@ class WomenCategory extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CategHeaderLabel(headerLabel: 'Women'),
+                  const CategHeaderLabel(headerLabel: 'bags'),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.68,
                     child: GridView.count(
                       mainAxisSpacing: 70,
                       crossAxisSpacing: 15,
                       crossAxisCount: 3,
-                      children: List.generate(women.length, (index) {
+                      children: List.generate(bags.length, (index) {
                         return SubCategModel(
-                          assetName: 'images/women/women$index.jpg',
-                          mainCategName: 'women',
-                          subCategName: women[index],
-                          subcategLable: women[index],
+                          assetName: 'images/bags/bags$index.jpg',
+                          mainCategName: 'bags',
+                          subCategName: bags[index],
+                          subcategLable: bags[index],
                         );
                       }),
                     ),
@@ -44,7 +44,7 @@ class WomenCategory extends StatelessWidget {
           Positioned(
               bottom: 0,
               right: 0,
-              child: SliderBar(context: context, mainCategName: 'women'))
+              child: SliderBar(context: context, mainCategName: 'bags'))
         ],
       ),
     );

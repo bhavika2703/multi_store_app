@@ -57,7 +57,7 @@ class SubCategModel extends StatelessWidget {
               child: Image(
                 image: AssetImage(assetName),
               )),
-          Text(subcategLable),
+          Text(subcategLable,style:const TextStyle(fontSize: 11), ),
         ],
       ),
     );

@@ -58,8 +58,8 @@ List<String> shoes = [
   'men canvas',
   'men sport',
   'men snadals',
-  'home slippers',
-  'women slippers',
+  'homeSlippers',
+  'womenSlippers',
   'women boots',
   'women heels',
   'women sport',
@@ -84,7 +84,7 @@ List<String> beauty = [
   'body care',
   'hair care',
   'men perfume',
-  'women perfume',
+  'women Perfume',
   'make up',
   'other'
 ];
