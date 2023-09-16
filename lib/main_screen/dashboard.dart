@@ -55,8 +55,8 @@ class DashboardScreen extends StatelessWidget {
              mainAxisAlignment: MainAxisAlignment.spaceAround, 
               children: [
                 Icon(icons[index],color: Colors.yellowAccent,),
-                Text(label[index],
-                style: const TextStyle(fontSize: 24,
+                Text(label[index].toUpperCase(),
+                style: const TextStyle(fontSize: 22,
                 fontWeight: FontWeight.w600,
                 color: Colors.yellowAccent,
                 fontFamily: 'Acme',letterSpacing: 2),)
