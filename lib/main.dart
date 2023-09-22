@@ -11,9 +11,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       debugShowCheckedModeBanner:false,
-      home: WelcomeScreen(),
+      home: const WelcomeScreen(),
+      initialRoute: '/welcome_screen',
+      routes: {
+        '/welcome_screen':((context) => const WelcomeScreen()),
+        '/customer_home':((context) => const CustomerHomeScreen()),
+        '/supplier_home':((context) => const SupplierHomeScreen()),
+      },
      
     );
   }

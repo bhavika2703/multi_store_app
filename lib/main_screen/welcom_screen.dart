@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:multi_store_app/main_screen/supplier_home.dart';
 import 'package:multi_store_app/widgets/yellow_button.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
@@ -139,7 +140,9 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                           children: [
                             AnimatedLogo(controller: _controller),
                             YellowButton(
-                                label: 'Log In', onPressed: () {}, width: 0.25),
+                                label: 'Log In', onPressed: () {
+                                  Navigator.pushReplacementNamed(context, '/supplier_home');
+                                }, width: 0.25),
                             Padding(
                               padding: const EdgeInsets.only(right: 8.0),
                               child: YellowButton(
@@ -173,7 +176,9 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: YellowButton(
-                              label: 'Log In', onPressed: () {}, width: 0.25),
+                              label: 'Log In', onPressed: () {
+                                  Navigator.pushReplacementNamed(context, '/customer_home');
+                              }, width: 0.25),
                         ),
                         YellowButton(
                             label: 'Sign Up', onPressed: () {}, width: 0.25),
