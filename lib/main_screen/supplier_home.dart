@@ -18,7 +18,7 @@ class _SupplierHomeScreenState extends State<SupplierHomeScreen> {
     const CategoryScreen(),
     const StoresScreen(),
     const DashboardScreen(),
-    Center(child: Text('Upload'),),
+    const Center(child: Text('Upload'),),
   ];
 
   void _onItemTapped(int index) {

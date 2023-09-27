@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:multi_store_app/main_screen/supplier_home.dart';
 import 'package:multi_store_app/widgets/yellow_button.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
@@ -181,7 +180,9 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                               }, width: 0.25),
                         ),
                         YellowButton(
-                            label: 'Sign Up', onPressed: () {}, width: 0.25),
+                            label: 'Sign Up', onPressed: () {
+                               Navigator.pushReplacementNamed(context, '/customer_signup');
+                            }, width: 0.25),
                         AnimatedLogo(
                           controller: _controller,
                         ),
