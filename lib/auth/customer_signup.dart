@@ -9,6 +9,7 @@ class CustomerRegister extends StatefulWidget {
 }
 
 class _CustomerRegisterState extends State<CustomerRegister> {
+  bool passwordVisible = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,8 +98,10 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: TextFormField(
+                      obscureText: passwordVisible,
                       decoration: textFormDecoration(
                           labelText: 'Password',
+                          isPasswordView: true,
                           hintText: 'enter your password'),
                     ),
                   ),
@@ -121,10 +124,24 @@ class _CustomerRegisterState extends State<CustomerRegister> {
   }
 
   InputDecoration textFormDecoration(
-      {required String labelText, required String hintText}) {
+      {required String labelText,
+      required String hintText,
+      bool isPasswordView = false}) {
     return InputDecoration(
       labelText: labelText,
       hintText: hintText,
+      suffixIcon: isPasswordView
+          ? IconButton(
+              onPressed: () {
+                setState(() {
+                  passwordVisible = !passwordVisible;
+                });
+              },
+              icon: Icon(
+                passwordVisible ? Icons.visibility_off : Icons.visibility,
+                color: Colors.purple,
+              ))
+          : null,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(25),
       ),
@@ -139,4 +156,3 @@ class _CustomerRegisterState extends State<CustomerRegister> {
     );
   }
 }
-
