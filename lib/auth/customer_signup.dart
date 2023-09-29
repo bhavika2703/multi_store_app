@@ -29,8 +29,8 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                     Row(
                       children: [
                         const Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 40, vertical: 20),
                           child: CircleAvatar(
                             radius: 60,
                             backgroundColor: Colors.purpleAccent,
@@ -85,7 +85,7 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: TextFormField(
                         validator: (value) {
-                          if(value!.isEmpty){
+                          if (value!.isEmpty) {
                             return 'Please enter your full name';
                           }
                           return null;
@@ -98,9 +98,13 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: TextFormField(
-                         validator: (value) {
-                          if(value!.isEmpty){
+                        validator: (value) {
+                          if (value!.isEmpty) {
                             return 'Please enter your email address';
+                          } else if (value.isValidEmail() == false) {
+                            return 'invalid email';
+                          } else if (value.isValidEmail() == true) {
+                            return null;
                           }
                           return null;
                         },
@@ -114,8 +118,8 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: TextFormField(
                         obscureText: passwordVisible,
-                         validator: (value) {
-                          if(value!.isEmpty){
+                        validator: (value) {
+                          if (value!.isEmpty) {
                             return 'Please enter your password';
                           }
                           return null;
@@ -134,10 +138,9 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                     AuthMainButton(
                       mainButtonLabel: 'Sign Up',
                       onPressed: () {
-                        if(_formKey.currentState!.validate()){
+                        if (_formKey.currentState!.validate()) {
                           print('valid');
-
-                        }else{
+                        } else {
                           print('not valid');
                         }
                       },
@@ -183,5 +186,13 @@ class _CustomerRegisterState extends State<CustomerRegister> {
         borderRadius: BorderRadius.circular(25),
       ),
     );
+  }
+}
+
+extension EmailValidator on String {
+  bool isValidEmail() {
+    return RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(this);
   }
 }
