@@ -1,10 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:multi_store_app/widgets/auth_widgets.dart';
 import 'package:multi_store_app/widgets/snackbar.dart';
-
-final TextEditingController _nameController = TextEditingController();
-final TextEditingController _emailController = TextEditingController();
-final TextEditingController _passwordController = TextEditingController();
+import 'package:image_picker/image_picker.dart';
 
 class CustomerRegister extends StatefulWidget {
   const CustomerRegister({Key? key}) : super(key: key);
@@ -23,6 +22,51 @@ class _CustomerRegisterState extends State<CustomerRegister> {
   late String password;
 
   bool passwordVisible = false;
+  final ImagePicker _picker = ImagePicker();
+
+  XFile? _imageFile;
+  dynamic _pickedImageError;
+
+  void _pickImageCamera() async {
+    try{
+      final pickedImage = await _picker.pickImage(
+        source: ImageSource.camera,
+        maxHeight: 300,
+        maxWidth: 300,
+        imageQuality: 95);
+        setState(() {
+          _imageFile =pickedImage;
+        });
+    }catch(e){
+      setState(() {
+        _pickedImageError = e;
+      });
+      print(_pickedImageError);
+    }
+   
+  }
+
+
+   void _pickImageGallery() async {
+    try{
+      final pickedImage = await _picker.pickImage(
+        source: ImageSource.gallery,
+        maxHeight: 300,
+        maxWidth: 300,
+        imageQuality: 95);
+        setState(() {
+          _imageFile =pickedImage;
+        });
+    }catch(e){
+      setState(() {
+        _pickedImageError = e;
+      });
+      print(_pickedImageError);
+    }
+   
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return ScaffoldMessenger(
@@ -42,12 +86,14 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                       const AuthHeaderLabel(headerLabel: 'Sign Up'),
                       Row(
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.symmetric(
+                           Padding(
+                            padding:const  EdgeInsets.symmetric(
                                 horizontal: 40, vertical: 20),
                             child: CircleAvatar(
                               radius: 60,
                               backgroundColor: Colors.purpleAccent,
+                              backgroundImage: _imageFile == null ?
+                              null :FileImage(File(_imageFile!.path)),
                             ),
                           ),
                           Column(
@@ -66,7 +112,7 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                                     color: Colors.white,
                                   ),
                                   onPressed: () {
-                                    print("pick image from camera");
+                                   _pickImageCamera();
                                   },
                                 ),
                               ),
@@ -87,7 +133,7 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                                     color: Colors.white,
                                   ),
                                   onPressed: () {
-                                    print("pick image from gallary");
+                                    _pickImageGallery();
                                   },
                                 ),
                               ),
@@ -98,7 +144,7 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: TextFormField(
-                          controller: _nameController,
+                          //controller: _nameController,
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Please enter your full name';
@@ -116,14 +162,15 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: TextFormField(
-                          controller: _emailController,
+                          // controller: _emailController,
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Please enter your email address';
                             } else if (value.isValidEmail() == false) {
                               return 'invalid email';
                             } else if (value.isValidEmail() == true) {
-                                 MyMessageHandler().showSnackBar(_scaffoldKey,'your email is valid');
+                              MyMessageHandler().showSnackBar(
+                                  _scaffoldKey, 'your email is valid');
                             }
                             return null;
                           },
@@ -139,7 +186,7 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: TextFormField(
-                          controller: _passwordController,
+                          // controller: _passwordController,
                           obscureText: passwordVisible,
                           onChanged: (value) {
                             password = value;
@@ -165,17 +212,25 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                         mainButtonLabel: 'Sign Up',
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            print('valid');
-                            setState(() {
-                              name = _nameController.text;
-                              email = _emailController.text;
-                              password = _passwordController.text;
-                            });
+                         if(_imageFile!=null){
+                          print('image picked');
+                           print('valid');
+
                             print(name);
                             print(email);
                             print(password);
+                            _formKey.currentState!.reset();
+                            setState(() {
+                              _imageFile = null;
+                            });
+                         }else{
+                             MyMessageHandler().showSnackBar(
+                                _scaffoldKey, 'please pick image first');
+                         }
+                        
                           } else {
-                            MyMessageHandler().showSnackBar(_scaffoldKey,'please fill all fields');
+                            MyMessageHandler().showSnackBar(
+                                _scaffoldKey, 'please fill all fields');
                           }
                         },
                       )
