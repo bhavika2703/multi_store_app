@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:multi_store_app/widgets/auth_widgets.dart';
+import 'package:multi_store_app/widgets/snackbar.dart';
+
+final TextEditingController _nameController = TextEditingController();
+final TextEditingController _emailController = TextEditingController();
+final TextEditingController _passwordController = TextEditingController();
 
 class CustomerRegister extends StatefulWidget {
   const CustomerRegister({Key? key}) : super(key: key);
@@ -10,142 +15,172 @@ class CustomerRegister extends StatefulWidget {
 
 class _CustomerRegisterState extends State<CustomerRegister> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldMessengerState> _scaffoldKey =
+      GlobalKey<ScaffoldMessengerState>();
+
+  late String name;
+  late String email;
+  late String password;
+
   bool passwordVisible = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            reverse: true,
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    const AuthHeaderLabel(headerLabel: 'Sign Up'),
-                    Row(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 40, vertical: 20),
-                          child: CircleAvatar(
-                            radius: 60,
-                            backgroundColor: Colors.purpleAccent,
+    return ScaffoldMessenger(
+      key: _scaffoldKey,
+      child: Scaffold(
+        body: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              reverse: true,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      const AuthHeaderLabel(headerLabel: 'Sign Up'),
+                      Row(
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 40, vertical: 20),
+                            child: CircleAvatar(
+                              radius: 60,
+                              backgroundColor: Colors.purpleAccent,
+                            ),
                           ),
-                        ),
-                        Column(
-                          children: [
-                            Container(
-                              decoration: const BoxDecoration(
-                                color: Colors.purple,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(15),
-                                  topRight: Radius.circular(15),
+                          Column(
+                            children: [
+                              Container(
+                                decoration: const BoxDecoration(
+                                  color: Colors.purple,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(15),
+                                    topRight: Radius.circular(15),
+                                  ),
+                                ),
+                                child: IconButton(
+                                  icon: const Icon(
+                                    Icons.camera_alt,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () {
+                                    print("pick image from camera");
+                                  },
                                 ),
                               ),
-                              child: IconButton(
-                                icon: const Icon(
-                                  Icons.camera_alt,
-                                  color: Colors.white,
-                                ),
-                                onPressed: () {
-                                  print("pick image from camera");
-                                },
+                              const SizedBox(
+                                height: 6,
                               ),
-                            ),
-                            const SizedBox(
-                              height: 6,
-                            ),
-                            Container(
-                              decoration: const BoxDecoration(
-                                color: Colors.purple,
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(15),
-                                  bottomRight: Radius.circular(15),
+                              Container(
+                                decoration: const BoxDecoration(
+                                  color: Colors.purple,
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(15),
+                                    bottomRight: Radius.circular(15),
+                                  ),
+                                ),
+                                child: IconButton(
+                                  icon: const Icon(
+                                    Icons.photo,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () {
+                                    print("pick image from gallary");
+                                  },
                                 ),
                               ),
-                              child: IconButton(
-                                icon: const Icon(
-                                  Icons.photo,
-                                  color: Colors.white,
-                                ),
-                                onPressed: () {
-                                  print("pick image from gallary");
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter your full name';
-                          }
-                          return null;
-                        },
-                        decoration: textFormDecoration(
-                            labelText: 'Full Name',
-                            hintText: 'enter your full name'),
+                            ],
+                          ),
+                        ],
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter your email address';
-                          } else if (value.isValidEmail() == false) {
-                            return 'invalid email';
-                          } else if (value.isValidEmail() == true) {
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: TextFormField(
+                          controller: _nameController,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter your full name';
+                            }
                             return null;
-                          }
-                          return null;
-                        },
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: textFormDecoration(
-                            labelText: 'Email Address',
-                            hintText: 'enter your email'),
+                          },
+                          onChanged: (value) {
+                            name = value;
+                          },
+                          decoration: textFormDecoration(
+                              labelText: 'Full Name',
+                              hintText: 'enter your full name'),
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: TextFormField(
-                        obscureText: passwordVisible,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter your password';
-                          }
-                          return null;
-                        },
-                        decoration: textFormDecoration(
-                            labelText: 'Password',
-                            isPasswordView: true,
-                            hintText: 'enter your password'),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: TextFormField(
+                          controller: _emailController,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter your email address';
+                            } else if (value.isValidEmail() == false) {
+                              return 'invalid email';
+                            } else if (value.isValidEmail() == true) {
+                                 MyMessageHandler().showSnackBar(_scaffoldKey,'your email is valid');
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            email = value;
+                          },
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: textFormDecoration(
+                              labelText: 'Email Address',
+                              hintText: 'enter your email'),
+                        ),
                       ),
-                    ),
-                    HaveAccount(
-                      haveAccount: 'already have account? ',
-                      actionLabel: 'Log In',
-                      onPressed: () {},
-                    ),
-                    AuthMainButton(
-                      mainButtonLabel: 'Sign Up',
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          print('valid');
-                        } else {
-                          print('not valid');
-                        }
-                      },
-                    )
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: TextFormField(
+                          controller: _passwordController,
+                          obscureText: passwordVisible,
+                          onChanged: (value) {
+                            password = value;
+                          },
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter your password';
+                            }
+                            return null;
+                          },
+                          decoration: textFormDecoration(
+                              labelText: 'Password',
+                              isPasswordView: true,
+                              hintText: 'enter your password'),
+                        ),
+                      ),
+                      HaveAccount(
+                        haveAccount: 'already have account? ',
+                        actionLabel: 'Log In',
+                        onPressed: () {},
+                      ),
+                      AuthMainButton(
+                        mainButtonLabel: 'Sign Up',
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            print('valid');
+                            setState(() {
+                              name = _nameController.text;
+                              email = _emailController.text;
+                              password = _passwordController.text;
+                            });
+                            print(name);
+                            print(email);
+                            print(password);
+                          } else {
+                            MyMessageHandler().showSnackBar(_scaffoldKey,'please fill all fields');
+                          }
+                        },
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -196,3 +231,5 @@ extension EmailValidator on String {
         .hasMatch(this);
   }
 }
+
+
