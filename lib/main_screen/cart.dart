@@ -63,10 +63,10 @@ class _CartScreenState extends State<CartScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Row(
+                 Row(
                   children: [
-                    Text('Total: \$ ', style: TextStyle(fontSize: 18)),
-                    Text('00.00',
+                    const Text('Total: \$ ', style: TextStyle(fontSize: 18)),
+                    const Text('00.00',
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,

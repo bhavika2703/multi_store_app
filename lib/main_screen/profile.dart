@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_store_app/customer_screens/customer_orders.dart';
 import 'package:multi_store_app/customer_screens/wishlist.dart';
 import 'package:multi_store_app/main_screen/cart.dart';
+import 'package:multi_store_app/widgets/alert_dialog.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -95,8 +97,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             child: TextButton(
                                 onPressed: () {
-                                  Navigator.push(context, 
-                                  MaterialPageRoute(builder: (context) =>  const CartScreen(isShowBackButton: true),));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const CartScreen(
+                                            isShowBackButton: true),
+                                      ));
                                 },
                                 child: SizedBox(
                                     height: 40,
@@ -113,8 +119,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             color: Colors.yellow,
                             child: TextButton(
                                 onPressed: () {
-                                   Navigator.push(context, 
-                                  MaterialPageRoute(builder: (context) =>const  CustomerOrders(),));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const CustomerOrders(),
+                                      ));
                                 },
                                 child: SizedBox(
                                     height: 40,
@@ -137,8 +147,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             child: TextButton(
                                 onPressed: () {
-                                   Navigator.push(context, 
-                                  MaterialPageRoute(builder: (context) =>const  WishListScreen(),));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const WishListScreen(),
+                                      ));
                                 },
                                 child: SizedBox(
                                     height: 40,
@@ -155,87 +169,104 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     Container(
-                     color: Colors.grey.shade300,  
+                      color: Colors.grey.shade300,
                       child: Column(
                         children: [
                           const SizedBox(
                             height: 150,
-                            child: Image(image: AssetImage('images/inapp/logo.jpg')),
+                            child: Image(
+                                image: AssetImage('images/inapp/logo.jpg')),
                           ),
-                       
-                      const ProfileHeaderLabel(headerLable: '  Account Info.  '),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          height: 260,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(16),
+                          const ProfileHeaderLabel(
+                              headerLable: '  Account Info.  '),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Container(
+                              height: 260,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Column(
+                                children: [
+                                  RepeatedListTile(
+                                    title: 'Email Address',
+                                    subTitle: 'example@gmail.com',
+                                    icon: Icons.email,
+                                  ),
+                                  const YellowDivider(),
+                                  RepeatedListTile(
+                                    title: 'phone No. ',
+                                    subTitle: '+1111111',
+                                    icon: Icons.phone,
+                                  ),
+                                  const YellowDivider(),
+                                  RepeatedListTile(
+                                    title: 'Address',
+                                    subTitle: 'example:140  -- st -- New Gersy',
+                                    icon: Icons.location_pin,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          child: Column(
-                            children: [
-                              RepeatedListTile(
-                                title: 'Email Address',
-                                subTitle: 'example@gmail.com',
-                                icon: Icons.email,
+                          const ProfileHeaderLabel(
+                              headerLable: ' Account Settings '),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Container(
+                              height: 260,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(16),
                               ),
-                              const YellowDivider(),
-                              RepeatedListTile(
-                                title: 'phone No. ',
-                                subTitle: '+1111111',
-                                icon: Icons.phone,
+                              child: Column(
+                                children: [
+                                  RepeatedListTile(
+                                    title: 'Edit Profile',
+                                    icon: Icons.edit,
+                                    subTitle: '',
+                                    onPressed: () {},
+                                  ),
+                                  const YellowDivider(),
+                                  RepeatedListTile(
+                                    title: 'Change Password',
+                                    icon: Icons.lock,
+                                    subTitle: '',
+                                    onPressed: () {},
+                                  ),
+                                  const YellowDivider(),
+                                  RepeatedListTile(
+                                    title: 'Log Out',
+                                    icon: Icons.logout,
+                                    subTitle: '',
+                                    onPressed: () async {
+                                      MyAlertDilaog.showMyDialog(
+                                        context: context,
+                                        title: "Log Out",
+                                        subTitle: "Are you sure to log out ?",
+                                        tabNo: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        tabYes: () async {
+                                          await FirebaseAuth.instance.signOut();
+                                          Navigator.pop(context);
+
+                                          Navigator.pushReplacementNamed(
+                                              context, '/welcome_screen');
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ],
                               ),
-                              const YellowDivider(),
-                              RepeatedListTile(
-                                title: 'Address',
-                                subTitle: 'example:140  -- st -- New Gersy',
-                                icon: Icons.location_pin,
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                      const ProfileHeaderLabel(headerLable: ' Account Settings '),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          height: 260,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: Column(
-                            children: [
-                              RepeatedListTile(
-                                title: 'Edit Profile',
-                                icon: Icons.edit,
-                                subTitle: '',
-                                onPressed: () {},
-                              ),
-                              const YellowDivider(),
-                              RepeatedListTile(
-                                title: 'Change Password',
-                                icon: Icons.lock,
-                                subTitle: '',
-                                onPressed: () {},
-                              ),
-                              const YellowDivider(),
-                              RepeatedListTile(
-                                title: 'Log Out',
-                                icon: Icons.logout,
-                                subTitle: '',
-                                onPressed: () {
-                                    Navigator.pushReplacementNamed(context, '/welcome_screen');
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                                      ],
-                                    ),
-                    ), ],
                     ),
+                  ],
+                ),
               ),
             ],
           ),

@@ -25,16 +25,16 @@ class _FakeSearchState extends State<FakeSearch> {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Row(
+                   Row(
                     children: [
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10),
                         child: Icon(
                           Icons.search,
                           color: Colors.grey,
                         ),
                       ),
-                      Text(
+                      const Text(
                         'What are you looking for?',
                         style: TextStyle(fontSize: 16, color: Colors.grey),
                       ),
