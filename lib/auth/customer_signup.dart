@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_store_app/widgets/auth_widgets.dart';
 import 'package:multi_store_app/widgets/snackbar.dart';
@@ -28,44 +30,69 @@ class _CustomerRegisterState extends State<CustomerRegister> {
   dynamic _pickedImageError;
 
   void _pickImageCamera() async {
-    try{
+    try {
       final pickedImage = await _picker.pickImage(
-        source: ImageSource.camera,
-        maxHeight: 300,
-        maxWidth: 300,
-        imageQuality: 95);
-        setState(() {
-          _imageFile =pickedImage;
-        });
-    }catch(e){
+          source: ImageSource.camera,
+          maxHeight: 300,
+          maxWidth: 300,
+          imageQuality: 95);
+      setState(() {
+        _imageFile = pickedImage;
+      });
+    } catch (e) {
       setState(() {
         _pickedImageError = e;
       });
       print(_pickedImageError);
     }
-   
   }
 
-
-   void _pickImageGallery() async {
-    try{
+  void _pickImageGallery() async {
+    try {
       final pickedImage = await _picker.pickImage(
-        source: ImageSource.gallery,
-        maxHeight: 300,
-        maxWidth: 300,
-        imageQuality: 95);
-        setState(() {
-          _imageFile =pickedImage;
-        });
-    }catch(e){
+          source: ImageSource.gallery,
+          maxHeight: 300,
+          maxWidth: 300,
+          imageQuality: 95);
+      setState(() {
+        _imageFile = pickedImage;
+      });
+    } catch (e) {
       setState(() {
         _pickedImageError = e;
       });
       print(_pickedImageError);
     }
-   
   }
 
+  void signUp() async {
+    if (_formKey.currentState!.validate()) {
+      if (_imageFile != null) {
+        try {
+          await FirebaseAuth.instance
+              .createUserWithEmailAndPassword(email: email, password: password);
+          _formKey.currentState!.reset();
+          setState(() {
+            _imageFile = null;
+          });
+           Navigator.pushReplacementNamed(context, '/customer_home');
+        } on FirebaseAuthException catch (e) {
+          if (e.code == "weak-password") {
+            MyMessageHandler().showSnackBar(
+                _scaffoldKey, 'The password provided is too weak.');
+          } else if (e.code == "email-already-in-use") {
+            MyMessageHandler().showSnackBar(
+                _scaffoldKey, 'The account already exists for that email.');
+          }
+        }
+      } else {
+        MyMessageHandler()
+            .showSnackBar(_scaffoldKey, 'please pick image first');
+      }
+    } else {
+      MyMessageHandler().showSnackBar(_scaffoldKey, 'please fill all fields');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,14 +113,15 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                       const AuthHeaderLabel(headerLabel: 'Sign Up'),
                       Row(
                         children: [
-                           Padding(
-                            padding:const  EdgeInsets.symmetric(
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 40, vertical: 20),
                             child: CircleAvatar(
                               radius: 60,
                               backgroundColor: Colors.purpleAccent,
-                              backgroundImage: _imageFile == null ?
-                              null :FileImage(File(_imageFile!.path)),
+                              backgroundImage: _imageFile == null
+                                  ? null
+                                  : FileImage(File(_imageFile!.path)),
                             ),
                           ),
                           Column(
@@ -112,7 +140,7 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                                     color: Colors.white,
                                   ),
                                   onPressed: () {
-                                   _pickImageCamera();
+                                    _pickImageCamera();
                                   },
                                 ),
                               ),
@@ -211,27 +239,8 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                       AuthMainButton(
                         mainButtonLabel: 'Sign Up',
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                         if(_imageFile!=null){
-                          print('image picked');
-                           print('valid');
-
-                            print(name);
-                            print(email);
-                            print(password);
-                            _formKey.currentState!.reset();
-                            setState(() {
-                              _imageFile = null;
-                            });
-                         }else{
-                             MyMessageHandler().showSnackBar(
-                                _scaffoldKey, 'please pick image first');
-                         }
-                        
-                          } else {
-                            MyMessageHandler().showSnackBar(
-                                _scaffoldKey, 'please fill all fields');
-                          }
+                          signUp();
+                      
                         },
                       )
                     ],
@@ -286,5 +295,3 @@ extension EmailValidator on String {
         .hasMatch(this);
   }
 }
-
-
