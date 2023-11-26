@@ -183,7 +183,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                               label: 'Log In',
                               onPressed: () {
                                 Navigator.pushReplacementNamed(
-                                    context, '/customer_home');
+                                    context, '/customer_login');
                               },
                               width: 0.25),
                         ),
