@@ -280,7 +280,10 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                       AuthMainButton(
                         mainButtonLabel: 'Sign Up',
                         onPressed: () {
-                          signUp();
+                          setState(() {
+                              signUp();
+                          });
+                        
                         },
                       )
                     ],
