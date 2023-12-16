@@ -276,7 +276,7 @@ class _SupplierRegisterState extends State<SupplierRegister> {
                         actionLabel: 'Log In',
                         onPressed: () {
                           Navigator.pushReplacementNamed(
-                              context, '/customer_login');
+                              context, '/supplier_login');
                         },
                       ),
                       AuthMainButton(
