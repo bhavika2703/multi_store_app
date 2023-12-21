@@ -43,8 +43,8 @@ class SubCategModel extends StatelessWidget {
         Navigator.push(context, MaterialPageRoute(
           builder: (context) {
             return SubCategProducts(
-              subCategName: subCategName,
-              mainCategName: mainCategName,
+              subcategName: subCategName,
+              maincategName: mainCategName,
             );
           },
         ));

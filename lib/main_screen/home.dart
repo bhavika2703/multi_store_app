@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:multi_store_app/gallary/accessories_gallery.dart';
+import 'package:multi_store_app/gallary/beauty_gallery.dart';
+import 'package:multi_store_app/gallary/electronics_gallery.dart';
+import 'package:multi_store_app/gallary/homegarden_gallery.dart';
+import 'package:multi_store_app/gallary/kids_gallery.dart';
 import 'package:multi_store_app/gallary/men_gallary.dart';
 import 'package:multi_store_app/widgets/fake_search.dart';
+
+import '../gallary/bags_gallery.dart';
+import '../gallary/shoes_gallery.dart';
+import '../gallary/women_gallery.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -38,37 +47,20 @@ class _HomeScreenState extends State<HomeScreen> {
               ]),
         ),
         body: const TabBarView(children: [
-         
-         MenGallaryScreen(),
-          Center(
-            child: Text('women Screen'),
-          ),
-          Center(
-            child: Text('shoes Screen'),
-          ),
-          Center(
-            child: Text('Bages Screen'),
-          ),
-          Center(
-            child: Text('Electronics Screen'),
-          ),
-          Center(
-            child: Text('Accessories Screen'),
-          ),
-          Center(
-            child: Text('Home & Garden Screen'),
-          ),
-          Center(
-            child: Text('Kids Screen'),
-          ),
-          Center(
-            child: Text('Beauty Screen'),
-          ),
+          MenGallaryScreen(),
+          WomenGalleryScreen(),
+          ShoesGalleryScreen(),
+          BagsGalleryScreen(),
+          ElectronicsGalleryScreen(),
+          AccessoriesGalleryScreen(),
+          HomeGardenGalleryScreen(),
+          KidsGalleryScreen(),
+          BeautyGalleryScreen()
         ]),
       ),
     );
   }
-  }
+}
 
 class RepeatedTab extends StatelessWidget {
   final String label;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multi_store_app/minor_screen/product_details.dart';
 
 class ProductModel extends StatefulWidget {
   final dynamic products;
@@ -13,7 +14,13 @@ class _ProductModelState extends State<ProductModel> {
   Widget build(BuildContext context) {
     var onSale = widget.products['discount'];
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>  ProductDetailsScreen(proList: widget.products),
+            ));
+      },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Stack(
