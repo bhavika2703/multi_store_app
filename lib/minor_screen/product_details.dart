@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:multi_store_app/main_screen/cart.dart';
+import 'package:multi_store_app/minor_screen/fullScreenView.dart';
 import 'package:multi_store_app/models/product_model.dart';
 import 'package:multi_store_app/widgets/appbar_widget.dart';
 import 'package:multi_store_app/widgets/snackbar.dart';
@@ -40,12 +41,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               children: [
                 InkWell(
                   onTap: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => FullScreenView(
-                    //               imagesList: imagesList,
-                    //             )));
+                     Navigator.push(
+                         context,
+                         MaterialPageRoute(
+                             builder: (context) => FullScreenView(
+                                   imagesList: imagesList,
+                                 )));
                   },
                   child: Stack(
                     children: [
