@@ -32,3 +32,22 @@ class AppBarTitle extends StatelessWidget {
     return Center(child: Text(title,style: const TextStyle(color: Colors.black,fontFamily: 'Acme',fontSize: 28,letterSpacing: 1.5)));
   }
 }
+
+class YellowBackButton extends StatelessWidget {
+  const YellowBackButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: const Icon(
+        Icons.arrow_back_ios_new,
+        color: Colors.yellow,
+      ),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+  }
+}
