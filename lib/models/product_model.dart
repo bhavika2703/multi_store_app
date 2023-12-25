@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_store_app/minor_screen/product_details.dart';
 
@@ -18,7 +19,8 @@ class _ProductModelState extends State<ProductModel> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>  ProductDetailsScreen(proList: widget.products),
+              builder: (context) =>
+                  ProductDetailsScreen(proList: widget.products),
             ));
       },
       child: Padding(
@@ -64,7 +66,7 @@ class _ProductModelState extends State<ProductModel> {
                                   '\$ ',
                                   style: TextStyle(
                                       color: Colors.red,
-                                      fontSize: 16,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.w600),
                                 ),
                                 Text(
@@ -78,11 +80,11 @@ class _ProductModelState extends State<ProductModel> {
                                           fontWeight: FontWeight.w600)
                                       : const TextStyle(
                                           color: Colors.red,
-                                          fontSize: 16,
+                                          fontSize: 15,
                                           fontWeight: FontWeight.w600),
                                 ),
                                 const SizedBox(
-                                  width: 6,
+                                  width: 4,
                                 ),
                                 onSale != 0
                                     ? Text(
@@ -94,12 +96,28 @@ class _ProductModelState extends State<ProductModel> {
                                             .toStringAsFixed(2),
                                         style: const TextStyle(
                                             color: Colors.red,
-                                            fontSize: 16,
+                                            fontSize: 15,
                                             fontWeight: FontWeight.w600),
                                       )
                                     : const Text(''),
                               ],
                             ),
+                            IconButton(
+                                constraints: const BoxConstraints(),
+                                onPressed: () {},
+                                icon: widget.products['sid'] ==
+                                        FirebaseAuth.instance.currentUser!.uid
+                                    ? IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.edit,
+                                      color: Colors.red,
+                                    ))
+                                    : const Icon(
+                                        Icons.favorite_outline,
+                                        color: Colors.red,
+                                        size: 20,
+                                      )),
                           ],
                         )
                       ],

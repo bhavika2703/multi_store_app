@@ -6,16 +6,17 @@ import 'package:multi_store_app/dashbored_component/my_store.dart';
 import 'package:multi_store_app/dashbored_component/supp_balance.dart';
 import 'package:multi_store_app/dashbored_component/supp_orders.dart';
 import 'package:multi_store_app/dashbored_component/supp_statics.dart';
+import 'package:multi_store_app/main_screen/visit_store.dart';
 import 'package:multi_store_app/widgets/alert_dialog.dart';
 import 'package:multi_store_app/widgets/appbar_widget.dart';
 
-List<Widget> pages = const [
-  MyStore(),
-  SupplierOrders(),
-  EditBusiness(),
-  ManageProducts(),
-  BalanceScreen(),
-  StacticsScreen(),
+List<Widget> pages =  [
+ VisitStore(suppId: FirebaseAuth.instance.currentUser!.uid),
+  const SupplierOrders(),
+  const EditBusiness(),
+  const ManageProducts(),
+  const BalanceScreen(),
+  const StacticsScreen(),
 ];
 
 List<String> label = [
