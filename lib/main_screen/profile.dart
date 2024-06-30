@@ -8,6 +8,7 @@ import 'package:multi_store_app/widgets/alert_dialog.dart';
 
 class ProfileScreen extends StatefulWidget {
   final String documentId;
+
   const ProfileScreen({Key? key, required this.documentId}) : super(key: key);
 
   @override
@@ -139,8 +140,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    const CartScreen(
-                                                        isShowBackButton: true),
+                                                    const CartScreen(),
                                               ));
                                         },
                                         child: SizedBox(
@@ -196,7 +196,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    const WishListScreen(),
+                                                    const WishlistScreen(),
                                               ));
                                         },
                                         child: SizedBox(
@@ -299,7 +299,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               MyAlertDilaog.showMyDialog(
                                                 context: context,
                                                 title: "Log Out",
-                                                subTitle:
+                                                content:
                                                     "Are you sure to log out ?",
                                                 tabNo: () {
                                                   Navigator.of(context).pop();
@@ -366,6 +366,7 @@ class RepeatedListTile extends StatelessWidget {
   String subTitle = '';
   final IconData icon;
   final Function()? onPressed;
+
   RepeatedListTile(
       {Key? key,
       required this.title,
@@ -389,6 +390,7 @@ class RepeatedListTile extends StatelessWidget {
 
 class ProfileHeaderLabel extends StatelessWidget {
   final String headerLable;
+
   const ProfileHeaderLabel({
     Key? key,
     required this.headerLable,

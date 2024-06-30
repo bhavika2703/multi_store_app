@@ -53,7 +53,7 @@ class DashboardScreen extends StatelessWidget {
                 MyAlertDilaog.showMyDialog(
                   context: context,
                   title: "Log Out",
-                  subTitle: "Are you sure to log out ?",
+                   content: "Are you sure to log out ?",
                   tabNo: () {
                     Navigator.of(context).pop();
                   },
