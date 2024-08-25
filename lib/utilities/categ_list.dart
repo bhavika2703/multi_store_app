@@ -19,8 +19,6 @@ List<String> men = [
   'coat',
   'jeans',
   'shorts',
-  'suit',
-  'other',
 ];
 List<String> women = [
   'subcategory',
@@ -32,8 +30,6 @@ List<String> women = [
   'jeans',
   'pants',
   'coat',
-  'jacket',
-  'other'
 ];
 List<String> electronics = [
   'subcategory',
@@ -49,8 +45,7 @@ List<String> electronics = [
   'tablet',
   'mouse',
   'keyboard',
-  'gaming',
-  'other'
+
 ];
 
 List<String> shoes = [
@@ -81,8 +76,7 @@ List<String> homeandgarden = [
   'furniture',
   'decoration',
   'lighting',
-  'garden',
-  'other'
+
 ];
 
 List<String> beauty = [
@@ -91,8 +85,6 @@ List<String> beauty = [
   'hair care',
   'men perfume',
   'women perfume',
-  'make up',
-  'other'
 ];
 
 List<String> accessories = [
@@ -106,8 +98,7 @@ List<String> accessories = [
   'ring',
   'necklace',
   'scarf set',
-  'anklet',
-  'other'
+
 ];
 
 List<String> kids = [
@@ -123,8 +114,6 @@ List<String> kids = [
   'boys pants',
   'home wear',
   'boys suits',
-  'baby shoes',
-  'other'
 ];
 
 List<String> bags = [
@@ -135,6 +124,5 @@ List<String> bags = [
   'back pack',
   'business bags',
   'laptop bags',
-  'women bags',
-  'other'
+
 ];
