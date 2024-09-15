@@ -56,7 +56,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
         constraints: const BoxConstraints.expand(),
         decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('images/inapp/bgimage.jpg'),
+                image: AssetImage('images/inapp/bgimage.png'),
                 fit: BoxFit.cover)),
         child: SafeArea(
           child: Column(
@@ -70,7 +70,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     colors: textColors,
                   ),
                   ColorizeAnimatedText(
-                    'Duck Store',
+                    'To Store',
                     textStyle: textStyle,
                     colors: textColors,
                   ),
@@ -82,7 +82,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               const SizedBox(
                 height: 120,
                 width: 200,
-                child: Image(image: AssetImage('images/inapp/logo.jpg')),
+                child: Image(image: AssetImage('images/inapp/logo.png')),
               ),
               SizedBox(
                 height: 80,
@@ -96,7 +96,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     animatedTexts: [
                       RotateAnimatedText('Buy'),
                       RotateAnimatedText('Shop'),
-                      RotateAnimatedText('Duck Store'),
+                      RotateAnimatedText('Online Store'),
                     ],
                     repeatForever: true,
                   ),
@@ -294,7 +294,7 @@ class AnimatedLogo extends StatelessWidget {
           child: child,
         );
       },
-      child: const Image(image: AssetImage('images/inapp/logo.jpg')),
+      child: const Image(image: AssetImage('images/inapp/logo.png')),
     );
   }
 }

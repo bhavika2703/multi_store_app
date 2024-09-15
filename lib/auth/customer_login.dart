@@ -105,7 +105,6 @@ class _CustomerLoginState extends State<CustomerLogin> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: TextFormField(
-                          // controller: _passwordController,
                           obscureText: passwordVisible,
                           onChanged: (value) {
                             password = value;

@@ -157,9 +157,9 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                                 horizontal: 40, vertical: 20),
                             child: CircleAvatar(
                               radius: 60,
-                              backgroundColor: Colors.purpleAccent,
+                           //   backgroundColor: Colors.purpleAccent,
                               backgroundImage: _imageFile == null
-                                  ? null
+                                  ? Image.asset('images/inapp/logo.png').image
                                   : FileImage(File(_imageFile!.path)),
                             ),
                           ),

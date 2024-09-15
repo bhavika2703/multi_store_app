@@ -20,30 +20,29 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
   @override
   Widget build(BuildContext context) {
     double totalPrice = context.watch<Cart>().totalPrice;
-    return FutureBuilder<DocumentSnapshot>(
-        future: customers.doc(FirebaseAuth.instance.currentUser!.uid).get(),
-        builder:
-            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-          if (snapshot.hasError) {
-            return const Text("Something went wrong");
-          }
+    return Material(
+      color: Colors.grey.shade200,
+      child: FutureBuilder<DocumentSnapshot>(
+          future: customers.doc(FirebaseAuth.instance.currentUser!.uid).get(),
+          builder:
+              (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+            if (snapshot.hasError) {
+              return const Center(child: Text("Something went wrong"));
+            }
 
-          if (snapshot.hasData && !snapshot.data!.exists) {
-            return const Text("Document does not exist");
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Material(
-                child: Center(
-              child: CircularProgressIndicator(),
-            ));
-          }
+            if (snapshot.hasData && !snapshot.data!.exists) {
+              return const Center(child: Text("Document does not exist"));
+            }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+            }
 
-          if (snapshot.connectionState == ConnectionState.done) {
-            Map<String, dynamic> data =
-                snapshot.data!.data() as Map<String, dynamic>;
-            return Material(
-              color: Colors.grey.shade200,
-              child: SafeArea(
+            if (snapshot.connectionState == ConnectionState.done) {
+              Map<String, dynamic> data =
+                  snapshot.data!.data() as Map<String, dynamic>;
+              return SafeArea(
                 child: Scaffold(
                   backgroundColor: Colors.grey.shade200,
                   appBar: AppBar(
@@ -204,12 +203,12 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                     ),
                   ),
                 ),
-              ),
+              );
+            }
+            return const Center(
+              child: CircularProgressIndicator(),
             );
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        });
+          }),
+    );
   }
 }
