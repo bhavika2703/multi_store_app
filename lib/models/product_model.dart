@@ -57,68 +57,71 @@ class _ProductModelState extends State<ProductModel> {
                               fontSize: 16,
                               fontWeight: FontWeight.w600),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                const Text(
-                                  '\$ ',
-                                  style: TextStyle(
-                                      color: Colors.red,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                Text(
-                                  widget.products['price'].toStringAsFixed(2),
-                                  style: onSale != 0
-                                      ? const TextStyle(
-                                          color: Colors.grey,
-                                          fontSize: 11,
-                                          decoration:
-                                              TextDecoration.lineThrough,
-                                          fontWeight: FontWeight.w600)
-                                      : const TextStyle(
-                                          color: Colors.red,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w600),
-                                ),
-                                const SizedBox(
-                                  width: 4,
-                                ),
-                                onSale != 0
-                                    ? Text(
-                                        ((1 -
-                                                    (widget.products[
-                                                            'discount'] /
-                                                        100)) *
-                                                widget.products['price'])
-                                            .toStringAsFixed(2),
-                                        style: const TextStyle(
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  const Text(
+                                    '\$ ',
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  Text(
+                                    widget.products['price'].toStringAsFixed(2),
+                                    style: onSale != 0
+                                        ? const TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: 11,
+                                            decoration:
+                                                TextDecoration.lineThrough,
+                                            fontWeight: FontWeight.w600)
+                                        : const TextStyle(
                                             color: Colors.red,
                                             fontSize: 15,
                                             fontWeight: FontWeight.w600),
-                                      )
-                                    : const Text(''),
-                              ],
-                            ),
-                            IconButton(
-                                constraints: const BoxConstraints(),
-                                onPressed: () {},
-                                icon: widget.products['sid'] ==
-                                        FirebaseAuth.instance.currentUser!.uid
-                                    ? IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.edit,
-                                      color: Colors.red,
-                                    ))
-                                    : const Icon(
-                                        Icons.favorite_outline,
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  onSale != 0
+                                      ? Text(
+                                          ((1 -
+                                                      (widget.products[
+                                                              'discount'] /
+                                                          100)) *
+                                                  widget.products['price'])
+                                              .toStringAsFixed(2),
+                                          style: const TextStyle(
+                                              color: Colors.red,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w600),
+                                        )
+                                      : const Text(''),
+                                ],
+                              ),
+                              IconButton(
+                                  constraints: const BoxConstraints(),
+                                  onPressed: () {},
+                                  icon: widget.products['sid'] ==
+                                          FirebaseAuth.instance.currentUser!.uid
+                                      ? IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.edit,
                                         color: Colors.red,
-                                        size: 20,
-                                      )),
-                          ],
+                                      ))
+                                      : const Icon(
+                                          Icons.favorite_outline,
+                                          color: Colors.red,
+                                          size: 20,
+                                        )),
+                            ],
+                          ),
                         )
                       ],
                     ),

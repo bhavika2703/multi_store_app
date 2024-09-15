@@ -15,7 +15,7 @@ class AccessoriesCategory extends StatelessWidget {
             bottom: 0,
             left: 0,
             child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.8,
+             // height: MediaQuery.of(context).size.height * 0.8,
               width: MediaQuery.of(context).size.width * 0.76,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
